@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quer casar comigo?</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="heart"></div>
+    <div class="button-container">
+        <button class="button" id="yes-button">Sim</button>
+        <button class="button no-button" id="no-button">Não</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+.heart {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    animation: heartbeat 1s infinite;
+}
+
+.heart:before,
+.heart:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 50px;
+    height: 80px;
+    background: red;
+    border-radius: 50px 50px 0 0;
+}
+
+.heart:after {
+    left: 50px;
+    border-radius: 0 0 50px 50px;
+}
+
+@keyframes heartbeat {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #45a049;
+}
+
+.no-button {
+    background-color: #f44336; /* Red */
+    transition: background-color 0.3s;
+}
+
+.no-button:hover {
+    background-color: #d32f2f;
+}
+document.getElementById('yes-button').addEventListener('click', function() {
+    var heart = document.querySelector('.heart');
+    var buttonContainer = document.querySelector('.button-container');
+    
+    // Animação de fogos
+    var fireworks = document.createElement('div');
+    fireworks.className = 'firework';
+    buttonContainer.appendChild(fireworks);
+    
+    // Remover botões
+    document.getElementById('yes-button').remove();
+    document.getElementById('no-button').remove();
+    
+    // Texto e emoji
+    var text = document.createElement('p');
+    text.textContent = 'Sim! Vamos até o altar 💍❤️';
+    text.style.fontSize = '24px';
+    text.style.marginTop = '20px';
+    buttonContainer.appendChild(text);
+    
+    // Remover coração após algum tempo
+    setTimeout(function() {
+        heart.style.display = 'none';
+    }, 3000);
+});
+
+document.getElementById('no-button').addEventListener('click', function() {
+    var noButton = document.getElementById('no-button');
+    noButton.style.animation = 'runAway 0.5s ease-out forwards';
+    
+    // Desativar o botão depois da animação
+    setTimeout(function() {
+        noButton.disabled = true;
+    }, 500);
+});
